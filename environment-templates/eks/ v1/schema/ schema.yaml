@@ -1,0 +1,58 @@
+schema:
+  format:
+    openapi: "3.0.0"
+  environment_input_type: "VPCEnvironmentInput"
+  types:
+    VPCEnvironmentInput:
+      type: object
+      description: "Input properties for my environment"
+      properties:
+        vpc_name:
+          type: string
+          description: "This is name for your VPC"
+          default: proton-demo
+        vpc_cidr:
+          type: string
+          description: "This CIDR range for your VPC"
+          default: 10.0.0.0/16
+          pattern: ([0-9]{1,3}\.){3}[0-9]{1,3}($|/(16|18|24))
+        aws_region:
+          type: string
+          description: "This is your aws region"
+          default: us-east-2
+        project_environment:
+          type: string
+          description: "This name for project env"
+          default: dev
+        project_name:
+          type: string
+          description: "This name for your project"
+          default: demo
+        public_subnet_cidrs:
+          type: string
+          description: "Subnet cidr, enter comma seperates values"
+          default: 10.0.101.0/24
+          pattern: ([0-9]{1,3}\.){3}[0-9]{1,3}($|/(16|18|24))
+        private_subnet_cidrs:
+          type: string
+          description: "Subnet cidr, enter comma seperates values"
+          default: 10.0.1.0/24
+          pattern: ([0-9]{1,3}\.){3}[0-9]{1,3}($|/(16|18|24))
+        managed_node_groups_instance_types:
+          type: string
+          description: "EC2 instance type, for multiple types, enter comma seperates values"
+          default: "m5.large"
+        cluster_version:
+          type: string
+          description: "The CIDR range for private subnet one"
+          default: 1.21
+        managed_node_groups_name:
+          type: string
+          description: "The CIDR range for private subnet one"
+          default: "managed-ondemand"
+        cluster_name:
+          type: string
+          description: "The EKS cluster name"
+          default: "proton-eks"
+          
+          
