@@ -45,7 +45,7 @@ schema:
         cluster_version:
           type: string
           description: "The CIDR range for private subnet one"
-          default: 1.21
+          default: "1.21"
         managed_node_groups_name:
           type: string
           description: "The CIDR range for private subnet one"
@@ -54,5 +54,3 @@ schema:
           type: string
           description: "The EKS cluster name"
           default: "proton-eks"
-          
-          
