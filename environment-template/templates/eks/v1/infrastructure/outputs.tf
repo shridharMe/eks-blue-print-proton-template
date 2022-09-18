@@ -10,3 +10,8 @@ output "cluster_region" {
 output "configure_kubectl" {
   value = module.eks_blueprints.configure_kubectl
 }
+
+output "module_version" {
+  value = module.eks_blueprints.configure_kubectl
+}
+

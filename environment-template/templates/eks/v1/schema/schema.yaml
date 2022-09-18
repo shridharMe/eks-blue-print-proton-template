@@ -54,3 +54,55 @@ schema:
           type: string
           description: "The EKS cluster name"
           default: "proton-eks"
+        enable_argocd:
+          type: boolean
+          description: "The EKS argos addon"
+          default: false
+        enable_aws_for_fluentbit:
+          type: boolean
+          description: "The EKS fluentbit addon"
+          default: false
+        enable_cert_manager:
+          type: boolean
+          description: "The EKS cert manager addon"
+          default: false
+        enable_cluster_autoscaler:
+          type: boolean
+          description: "The EKS cluster autoscaler addon"
+          default: false
+        enable_karpenter:
+          type: boolean
+          description: "The EKS karpenter addon"
+          default: false
+        enable_keda:
+          type: boolean
+          description: "The EKS keds addon"
+          default: false
+        enable_metrics_server:
+          type: boolean
+          description: "The EKS metrics server addon"
+          default: false
+        enable_prometheus:
+          type: boolean
+          description: "The EKS prometheus addon"
+          default: false
+        enable_traefik:
+          type: boolean
+          description: "The EKS traefik addon"
+          default: false
+        enable_traefik:
+          type: boolean
+          description: "The EKS traefik addon"
+          default: false
+        enable_vpa:
+          type: boolean
+          description: "The EKS vpc addon"
+          default: false
+        enable_yunikorn:
+          type: boolean
+          description: "The EKS yunikorn addon"
+          default: false
+        enable_argo_rollouts:
+          type: boolean
+          description: "The EKS argo_rollouts addon"
+          default: false

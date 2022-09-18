@@ -90,6 +90,7 @@ module "eks_blueprints_kubernetes_addons" {
   eks_cluster_version  = module.eks_blueprints.eks_cluster_version
 
   # EKS Addons
+  enable_amazon_eks_aws_ebs_csi_driver = true
   enable_amazon_eks_vpc_cni = true
   amazon_eks_vpc_cni_config = {
     addon_version     = data.aws_eks_addon_version.latest["vpc-cni"].version
@@ -108,22 +109,19 @@ module "eks_blueprints_kubernetes_addons" {
     resolve_conflicts = "OVERWRITE"
   }
 
-
-  enable_amazon_eks_aws_ebs_csi_driver = true
-
   #K8s Add-ons
-  enable_argocd                       = true
-  enable_aws_for_fluentbit             = true
-  enable_cert_manager                  = true
-  enable_cluster_autoscaler            = true
-  enable_karpenter                     = true
-  enable_keda                          = true
-  enable_metrics_server                = true
-  enable_prometheus                    = true
-  enable_traefik                       = true
-  enable_vpa                           = true
-  enable_yunikorn                      = true
-  enable_argo_rollouts                 = true
+  enable_argocd                        = var.environment.inputs.enable_argocd
+  enable_aws_for_fluentbit             = var.environment.inputs.enable_aws_for_fluentbit
+  enable_cert_manager                  = var.environment.inputs.enable_cert_manager
+  enable_cluster_autoscaler            = var.environment.inputs.enable_cluster_autoscaler
+  enable_karpenter                     = var.environment.inputs.enable_karpenter
+  enable_keda                          = var.environment.inputs.enable_keda
+  enable_metrics_server                = var.environment.inputs.enable_metrics_server
+  enable_prometheus                    = var.environment.inputs.enable_prometheus
+  enable_traefik                       = var.environment.inputs.enable_traefik
+  enable_vpa                           = var.environment.inputs.enable_vpa
+  enable_yunikorn                      = var.environment.inputs.enable_yunikorn
+  enable_argo_rollouts                 = var.environment.inputs.enable_argo_rollouts
 
   tags = {
     Wait=time_sleep.wait_30_seconds.id
