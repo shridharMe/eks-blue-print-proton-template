@@ -1,7 +1,7 @@
 
 resource "kubernetes_namespace" "game_2048" {
   metadata {
-    name = var.service_instance.inputs.kubernetes_space
+    name = var.service_instance.inputs.kubernetes_namespace
   }
 }
 resource "kubernetes_deployment" "game_2048" {
