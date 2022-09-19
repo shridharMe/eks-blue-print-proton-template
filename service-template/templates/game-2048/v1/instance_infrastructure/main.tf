@@ -6,7 +6,7 @@ resource "kubernetes_namespace" "game_2048" {
 }
 resource "kubernetes_deployment" "game_2048" {
   metadata {
-    name = "game-2048"
+    name      = "game-2048"
     namespace = kubernetes_namespace.game-2048.name
     labels = {
       "app.kubernetes.io/name" = "app-2048"
@@ -16,7 +16,7 @@ resource "kubernetes_deployment" "game_2048" {
     replicas = 1
     selector {
       match_labels = {
-       "app.kubernetes.io/name" = "app-2048"
+        "app.kubernetes.io/name" = "app-2048"
       }
     }
     template {
@@ -27,15 +27,15 @@ resource "kubernetes_deployment" "game_2048" {
       }
       spec {
         container {
-          image = join(":",["public.ecr.aws/l6m2t8p7/docker-2048", var.service_instance.inputs.container_version)
+          image = join(":", ["public.ecr.aws/l6m2t8p7/docker-2048", var.service_instance.inputs.container_version])
           name  = "app-2048"
           resources {
             limits = {
-              cpu    = var.service_instance.inputs.resource_cpu_limits #"0.5m"
+              cpu    = var.service_instance.inputs.resource_cpu_limits    #"0.5m"
               memory = var.service_instance.inputs.resource_memory_limits #"512Mi"
             }
             requests = {
-              cpu    = var.service_instance.inputs.resource_cpu_requests #"250m"
+              cpu    = var.service_instance.inputs.resource_cpu_requests    #"250m"
               memory = var.service_instance.inputs.resource_memory_requests #"50Mi"
             }
           }
@@ -48,8 +48,8 @@ resource "kubernetes_deployment" "game_2048" {
 
 resource "kubernetes_service" "game_2048" {
   metadata {
-    name = "game-2048"
-    namespace: kubernetes_namespace.game-2048.name
+    name      = "game-2048"
+    namespace = kubernetes_namespace.game-2048.name
   }
   spec {
     port {
@@ -68,7 +68,7 @@ resource "kubernetes_ingress" "game_2048" {
     name = "app-2048"
     annotations = {
       "alb.ingress.kubernetes.io/scheme" : "internet-facing"
-      "alb.ingress.kubernetes.io/target-type": "ip"
+      "alb.ingress.kubernetes.io/target-type" : "ip"
     }
   }
   spec {

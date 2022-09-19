@@ -25,7 +25,7 @@ data "aws_eks_cluster" "cluster" {
 }
 
 data "aws_eks_cluster_auth" "cluster" {
-  name =  var.environment.outputs.eks_cluster_id
+  name = var.environment.outputs.eks_cluster_id
 }
 
 provider "kubernetes" {
