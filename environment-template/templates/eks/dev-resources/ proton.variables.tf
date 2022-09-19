@@ -1,4 +1,4 @@
- variable "environment" {
+variable "environment" {
   type = object({
     inputs = map(string)
     name   = string

@@ -1,10 +1,10 @@
- 
 locals {
   #local_data = jsondecode(file("${path.module}/proton.auto.tfvars.json"))
   instance_types        = split(",", var.environment.inputs.managed_node_groups_instance_types)
   private_subnets_cidrs = split(",", var.environment.inputs.private_subnets_cidrs)
   public_subnets_cidrs  = split(",", var.environment.inputs.public_subnets_cidrs)
 }
+
 module "vpc" {
   source          = "terraform-aws-modules/vpc/aws"
   version         = "3.13.0"
@@ -60,7 +60,7 @@ module "eks_blueprints" {
 
 
 resource "time_sleep" "wait_30_seconds" {
-  depends_on = [module.eks_blueprints]
+  depends_on      = [module.eks_blueprints]
   create_duration = "30s"
 }
 
@@ -91,7 +91,9 @@ module "eks_blueprints_kubernetes_addons" {
 
   # EKS Addons
   enable_amazon_eks_aws_ebs_csi_driver = true
-  enable_amazon_eks_vpc_cni = true
+  enable_amazon_eks_vpc_cni            = true
+  enable_aws_load_balancer_controller  = true
+  enable_external_dns                  = true
   amazon_eks_vpc_cni_config = {
     addon_version     = data.aws_eks_addon_version.latest["vpc-cni"].version
     resolve_conflicts = "OVERWRITE"
@@ -110,20 +112,20 @@ module "eks_blueprints_kubernetes_addons" {
   }
 
   #K8s Add-ons
-  enable_argocd                        = var.environment.inputs.enable_argocd
-  enable_aws_for_fluentbit             = var.environment.inputs.enable_aws_for_fluentbit
-  enable_cert_manager                  = var.environment.inputs.enable_cert_manager
-  enable_cluster_autoscaler            = var.environment.inputs.enable_cluster_autoscaler
-  enable_karpenter                     = var.environment.inputs.enable_karpenter
-  enable_keda                          = var.environment.inputs.enable_keda
-  enable_metrics_server                = var.environment.inputs.enable_metrics_server
-  enable_prometheus                    = var.environment.inputs.enable_prometheus
-  enable_traefik                       = var.environment.inputs.enable_traefik
-  enable_vpa                           = var.environment.inputs.enable_vpa
-  enable_yunikorn                      = var.environment.inputs.enable_yunikorn
-  enable_argo_rollouts                 = var.environment.inputs.enable_argo_rollouts
+  enable_argocd             = var.environment.inputs.enable_argocd
+  enable_aws_for_fluentbit  = var.environment.inputs.enable_aws_for_fluentbit
+  enable_cert_manager       = var.environment.inputs.enable_cert_manager
+  enable_cluster_autoscaler = var.environment.inputs.enable_cluster_autoscaler
+  enable_karpenter          = var.environment.inputs.enable_karpenter
+  enable_keda               = var.environment.inputs.enable_keda
+  enable_metrics_server     = var.environment.inputs.enable_metrics_server
+  enable_prometheus         = var.environment.inputs.enable_prometheus
+  enable_traefik            = var.environment.inputs.enable_traefik
+  enable_vpa                = var.environment.inputs.enable_vpa
+  enable_yunikorn           = var.environment.inputs.enable_yunikorn
+  enable_argo_rollouts      = var.environment.inputs.enable_argo_rollouts
 
   tags = {
-    Wait=time_sleep.wait_30_seconds.id
+    Wait = time_sleep.wait_30_seconds.id
   }
 }
