@@ -5,29 +5,29 @@ resource "kubernetes_namespace" "game_2048" {
 }
 resource "kubernetes_deployment" "game_2048" {
   metadata {
-    name      = "game-2048"
+    name      = join("-",kubernetes_namespace.game_2048.metadata[0].name, "game-2048")
     namespace = kubernetes_namespace.game_2048.metadata[0].name
     labels = {
-      "app.kubernetes.io/name" = "app-2048"
+      "app.kubernetes.io/name" =join("-",kubernetes_namespace.game_2048.metadata[0].name, "game-2048")
     }
   }
   spec {
     replicas = 1
     selector {
       match_labels = {
-        "app.kubernetes.io/name" = "app-2048"
+        "app.kubernetes.io/name" = join("-",kubernetes_namespace.game_2048.metadata[0].name, "game-2048")
       }
     }
     template {
       metadata {
         labels = {
-          "app.kubernetes.io/name" = "app-2048"
+          "app.kubernetes.io/name" = join("-",kubernetes_namespace.game_2048.metadata[0].name, "game-2048")
         }
       }
       spec {
         container {
           image = join(":", ["public.ecr.aws/l6m2t8p7/docker-2048", var.service_instance.inputs.container_version])
-          name  = "app-2048"
+          name  = join("-",kubernetes_namespace.game_2048.metadata[0].name, "game-2048")
           resources {
             limits = {
               cpu    = var.service_instance.inputs.resource_cpu_limits    #"0.5m"
@@ -47,7 +47,7 @@ resource "kubernetes_deployment" "game_2048" {
 
 resource "kubernetes_service" "game_2048" {
   metadata {
-    name      = "game-2048"
+    name      = join("-",kubernetes_namespace.game_2048.metadata[0].name, "game-2048")
     namespace = kubernetes_namespace.game_2048.metadata[0].name
   }
   spec {
@@ -64,7 +64,7 @@ resource "kubernetes_service" "game_2048" {
 resource "kubernetes_ingress" "game_2048" {
   //wait_for_load_balancer = true
   metadata {
-    name = "game-2048"
+    name = join("-",kubernetes_namespace.game_2048.metadata[0].name, "game-2048")
     namespace = kubernetes_namespace.game_2048.metadata[0].name
     
     /*annotations = {

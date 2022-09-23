@@ -10,7 +10,7 @@ schema:
         kubernetes_namespace:
           type: string
           description: "This is k8s namespace"
-          default: game-2048
+          default: micro3
         container_version:
           type: string
           description: "This is k8s deployment version"
