@@ -1,4 +1,3 @@
-
 resource "kubernetes_namespace" "game_2048" {
   metadata {
     name = var.service_instance.inputs.kubernetes_namespace
@@ -7,7 +6,7 @@ resource "kubernetes_namespace" "game_2048" {
 resource "kubernetes_deployment" "game_2048" {
   metadata {
     name      = "game-2048"
-    namespace = kubernetes_namespace.game-2048.name
+    namespace = kubernetes_namespace.game_2048.metadata[0].name
     labels = {
       "app.kubernetes.io/name" = "app-2048"
     }
@@ -49,7 +48,7 @@ resource "kubernetes_deployment" "game_2048" {
 resource "kubernetes_service" "game_2048" {
   metadata {
     name      = "game-2048"
-    namespace = kubernetes_namespace.game-2048.name
+    namespace = kubernetes_namespace.game_2048.metadata[0].name
   }
   spec {
     port {
