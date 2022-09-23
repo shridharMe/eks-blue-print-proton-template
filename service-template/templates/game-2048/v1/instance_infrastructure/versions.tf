@@ -22,9 +22,6 @@ provider "aws" {
 
 data "aws_eks_cluster" "cluster" {
   name = var.environment.outputs.eks_cluster_id
-  vpc_config {
-    vpc_id=var.environment.outputs.vpc_id
-  }
 }
 
 data "aws_eks_cluster_auth" "cluster" {
