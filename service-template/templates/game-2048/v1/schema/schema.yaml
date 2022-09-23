@@ -18,7 +18,7 @@ schema:
         resource_cpu_limits:
           type: string
           description: "This is k8s deployment resource cpu limits"
-          default: "0.5m"
+          default: "250m"
         resource_memory_limits:
           type: string
           description: "This is k8s deployment resource memory limits"
