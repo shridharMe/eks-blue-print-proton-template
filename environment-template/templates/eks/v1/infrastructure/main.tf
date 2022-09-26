@@ -1,5 +1,4 @@
 locals {
-  #local_data = jsondecode(file("${path.module}/proton.auto.tfvars.json"))
   instance_types        = split(",", var.environment.inputs.managed_node_groups_instance_types)
   private_subnets_cidrs = split(",", var.environment.inputs.private_subnets_cidrs)
   public_subnets_cidrs  = split(",", var.environment.inputs.public_subnets_cidrs)
