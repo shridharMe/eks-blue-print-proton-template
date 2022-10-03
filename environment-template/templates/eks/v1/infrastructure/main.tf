@@ -122,13 +122,14 @@ module "eks_blueprints_kubernetes_addons" {
   enable_vpa                = var.environment.inputs.enable_vpa
   enable_yunikorn           = var.environment.inputs.enable_yunikorn
   enable_argo_rollouts      = var.environment.inputs.enable_argo_rollouts
-
-  tags =  merge(
+  tags = merge(
     var.tags,
     {
       Wait = time_sleep.wait_30_seconds.id
     }
-  ) 
+  )
+
+}
 
 
 variable "tags" {
