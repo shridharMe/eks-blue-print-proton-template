@@ -124,7 +124,15 @@ module "eks_blueprints_kubernetes_addons" {
   enable_yunikorn           = var.environment.inputs.enable_yunikorn
   enable_argo_rollouts      = var.environment.inputs.enable_argo_rollouts
 
-  tags = {
-    Wait = time_sleep.wait_30_seconds.id
-  }
+  tags =  merge(
+    var.tags,
+    {
+      Wait = time_sleep.wait_30_seconds.id
+    }
+  ) 
+
+
+variable "tags" {
+  type    = map(string)
+  default = {}
 }
